@@ -24,6 +24,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4ab5bcfe-53cd-4283-9535-7d1d79798abb"
+      }
+    },
+    "scheme": "fintiba"
   }
 }
