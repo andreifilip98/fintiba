@@ -27,6 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
+          <string>fintiba</string>
           <string>com.andrei.fintiba</string>
         </array>
       </dict>
