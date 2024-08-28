@@ -1,0 +1,7 @@
+{
+    "greet": "Hello",
+    "name": "Name",
+    "changeLanguage": "Change Language",
+    "logout": "Logout",
+    "signInWithGoogle": "Sign In with Google"
+}

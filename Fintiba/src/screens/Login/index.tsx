@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { deleteProfile, setProfile } from '../../state/profileSlices';
 import { store } from "../../state/store";
 import Button from "../../components/button";
+import { useTranslation } from "react-i18next";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -56,6 +57,8 @@ const LoginScreen = ({ navigation }) => {
         }
     };
 
+    const { t, i18n } = useTranslation();
+
     return (
         <View style={styles.container}>
             <Text style={{ fontSize: 40, fontWeight: 800, color: "#5381E6" }}>FINTIBA</Text>
@@ -63,7 +66,7 @@ const LoginScreen = ({ navigation }) => {
                 onPress={async () => { await promptAsync(); navigation.navigate("HomeScreen"); }}>
                 <Text style={{ fontSize: 20, color: "#ffffff" }}>Sign in with Google</Text>
             </TouchableOpacity> */}
-            <Button label="Sign in with Google" onPress={async () => { await promptAsync(); navigation.navigate("HomeScreen") }} />
+            <Button label={t("signInWithGoogle")} onPress={async () => { await promptAsync(); navigation.navigate("HomeScreen") }} />
         </View>
     )
 };

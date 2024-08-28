@@ -5,6 +5,7 @@ import LoginScreen from './src/screens/Login';
 import { store } from './src/state/store';
 import { NavigationContainer } from '@react-navigation/native';
 import NavigationStack from './src/screens/Navigation';
+import './src/i18n/i18n.config'
 
 export default function App() {
   return (
