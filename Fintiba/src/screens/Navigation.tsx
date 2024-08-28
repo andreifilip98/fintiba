@@ -11,8 +11,8 @@ const Stack = createNativeStackNavigator();
 function BottomTabNavigator() {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="HomeScreen" component={HomeScreen} />
-            <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
     );
 }
