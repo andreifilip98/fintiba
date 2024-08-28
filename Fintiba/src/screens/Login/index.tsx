@@ -1,13 +1,17 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as AuthSession from 'expo-auth-session/providers/google';
+import { useDispatch } from "react-redux";
+import { deleteProfile, setProfile } from '../../state/slices';
+import { store } from "../../state/store";
 
 WebBrowser.maybeCompleteAuthSession();
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
+
+    const dispatch = useDispatch();
 
     const [userInfo, setUserInfo] = React.useState(null);
     const [request, response, promptAsync] = Google.useAuthRequest({
@@ -25,9 +29,12 @@ const LoginScreen = () => {
         if (!user) {
             if (response?.type === "success") {
                 await getUserInfo(response.authentication.accessToken);
+
             }
         } else {
             setUserInfo(JSON.parse(user));
+
+
         }
     }
 
@@ -43,6 +50,8 @@ const LoginScreen = () => {
 
             const user = await response.json();
             await AsyncStorage.setItem("@user", JSON.stringify(user));
+            dispatch(setProfile({ name: user.name, email: user.email, picture: user.picture }));
+            console.log(JSON.stringify(store.getState()))
             setUserInfo(user);
         } catch (error) {
             console.log("----ERROR: " + error);
@@ -51,10 +60,12 @@ const LoginScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Text>{JSON.stringify(userInfo, null, 2)}</Text>
-            <Button title="Sign in with Google" onPress={() => promptAsync()} />
-            {/* to be done with redux */}
-            <Button title="Delete local storage" onPress={() => AsyncStorage.removeItem("@user")} />
+            <Text style={{ fontSize: 40, fontWeight: 800, color: "#5381E6" }}>FINTIBA</Text>
+            <TouchableOpacity style={{ backgroundColor: "#00A1FF", paddingHorizontal: 15, paddingVertical: 10, borderRadius: 10 }}
+                onPress={async () => { await promptAsync(); navigation.navigate("HomeScreen"); }}>
+                <Text style={{ fontSize: 20, color: "#ffffff" }}>Sign in with Google</Text>
+            </TouchableOpacity>
+            {/* <Button title="Delete local storage" onPress={() => dispatch(deleteProfile())} /> */}
         </View>
     )
 };
@@ -66,6 +77,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
     },
 });

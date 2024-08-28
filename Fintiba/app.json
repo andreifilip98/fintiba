@@ -13,7 +13,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.andrei.fintiba"
+      "bundleIdentifier": "com.andrei.fintiba",
+      "infoPlist": {
+      "CFBundleURLTypes": [
+        {
+          "CFBundleURLSchemes": ["com.googleusercontent.apps.805198455899-sabijblon1qdnuo0a86v4kumhvk3tn6t"]
+        }
+      ]
+    }
     },
     "android": {
       "adaptiveIcon": {

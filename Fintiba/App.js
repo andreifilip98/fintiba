@@ -1,16 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import LoginScreen from './src/screens/Login';
+import { store } from './src/state/store';
+import { NavigationContainer } from '@react-navigation/native';
+import NavigationStack from './src/screens/Navigation';
 
 export default function App() {
   return (
-    // <Provider>
-    //   <PersistGate>
-    <LoginScreen />
-    //   </PersistGate>
-    // </Provider>
+    <NavigationContainer>
+      <Provider store={store}>
+        {/* <LoginScreen /> */}
+        <NavigationStack />
+      </Provider>
+    </NavigationContainer>
   );
 }
 
