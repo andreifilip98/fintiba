@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
 import Button from "../../components/button";
 import { useTranslation } from "react-i18next";
+import { setProfile } from "../../state/profileSlices";
 
 WebBrowser.maybeCompleteAuthSession();
 
