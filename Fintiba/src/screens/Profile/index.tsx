@@ -5,7 +5,7 @@ import { deleteProfile, setProfile } from '../../state/profileSlices';
 import { store } from "../../state/store";
 import Button from "../../components/button";
 import { useTranslation } from "react-i18next";
-import i18next from "i18next";
+import Animated, { measure, runOnUI, useAnimatedRef, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
 const ProfileScreen = ({ navigation }) => {
 
@@ -25,25 +25,60 @@ const ProfileScreen = ({ navigation }) => {
         }
     }
 
+    // const height = useSharedValue(200);
+
+    // const handlePress = () => {
+    //     collapsed ? height.value = withSpring(height.value - 100) : height.value = withSpring(height.value + 100);
+    //     setCollapsed(!collapsed);
+    // };
+
+    const animatedRef = useAnimatedRef();
+    const isOpen = useSharedValue(false);
+    const height = useSharedValue(0);
+    const animatedHeightStyle = useAnimatedStyle(() => ({
+        height: withTiming(height.value)
+    }))
+
+    const setHeight = () => {
+        'worklet'
+
+        height.value = !height.value
+            ? Number(measure(animatedRef).height ?? 0)
+            :
+            0
+        isOpen.value = !isOpen.value
+    }
+
     return (
         <View style={styles.container}>
-            <View style={styles.profileCard}>
-                <View>
-                    <Image style={styles.profilePicture}
-                        source={{
-                            uri: userProfile.picture,
-                        }}
-                    />
+            <TouchableOpacity onPress={() => runOnUI(setHeight)()} style={styles.animatedCard}>
+                <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                    <View>
+                        <Image style={styles.profilePicture}
+                            source={{
+                                uri: userProfile.picture,
+                            }}
+                        />
+                    </View>
+                    <View style={{ alignItems: "center", paddingLeft: 10, justifyContent: "center" }}>
+                        <Text style={styles.text}>
+                            {userProfile.name}
+                        </Text>
+                        <Text style={styles.text}>
+                            {userProfile.email}
+                        </Text>
+                    </View>
                 </View>
-                <View style={{ alignItems: "center", paddingLeft: 10, justifyContent: "center" }}>
-                    <Text style={styles.text}>
-                        {userProfile.name}
-                    </Text>
-                    <Text style={styles.text}>
-                        {userProfile.email}
-                    </Text>
-                </View>
-            </View>
+                <Animated.View style={[animatedHeightStyle]}>
+                    <View ref={animatedRef}
+                        collapsable={false} style={{ position: "absolute", top: 10, left: -150, padding: 10 }}>
+                        <Text>
+                            sdfsadfasfds adf dasdf asf assdf da gsd gsdfgsdf fs saaskj bdaskjdf ajdh kjasbk dsahjk dasb
+                            sdfsadfasfds adf dasdf asf assdf da gsd gsdfgsdf fs saaskj bdaskjdf ajdh kjasbk dsahjk dasb
+                        </Text>
+                    </View>
+                </Animated.View>
+            </TouchableOpacity>
             <View style={{ flexDirection: 'row', alignItems: "center" }}>
                 <TouchableOpacity>
                     <Text style={{ color: "#000" }}>
@@ -61,7 +96,7 @@ const ProfileScreen = ({ navigation }) => {
             <View>
                 <Button label={t('logout')} onPress={() => { dispatch(deleteProfile()); navigation.navigate("LoginScreen") }} />
             </View>
-        </View>
+        </View >
     )
 };
 
@@ -74,13 +109,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
     },
-    profileCard: {
+    animatedCard: {
+        backgroundColor: "#e19a3d",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        overflow: "hidden",
         borderRadius: 10,
-        backgroundColor: "#0096C7",
-        paddingVertical: 15,
-        paddingHorizontal: 15,
-        flexDirection: "row",
-        justifyContent: "center"
+        padding: 10
     },
     profilePicture: {
         height: 100,
