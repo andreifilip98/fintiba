@@ -5,7 +5,7 @@ import { deleteProfile, setProfile } from '../../state/profileSlices';
 import { store } from "../../state/store";
 import Button from "../../components/button";
 import { useTranslation } from "react-i18next";
-import Animated, { measure, runOnUI, useAnimatedRef, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, { measure, runOnUI, useAnimatedRef, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
 const ProfileScreen = ({ navigation }) => {
 
@@ -24,13 +24,6 @@ const ProfileScreen = ({ navigation }) => {
             i18n.changeLanguage('ar');
         }
     }
-
-    // const height = useSharedValue(200);
-
-    // const handlePress = () => {
-    //     collapsed ? height.value = withSpring(height.value - 100) : height.value = withSpring(height.value + 100);
-    //     setCollapsed(!collapsed);
-    // };
 
     const animatedRef = useAnimatedRef();
     const isOpen = useSharedValue(false);

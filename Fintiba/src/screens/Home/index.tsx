@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity, ActivityIndicator, FlatList } from "react-native";
+import { View, Text, ActivityIndicator, FlatList } from "react-native";
 import { useDispatch } from "react-redux";
-import { deleteProfile, setProfile } from '../../state/profileSlices';
 import { store } from "../../state/store";
 import { setMovieList } from "../../state/movieSlices";
 
@@ -29,7 +28,7 @@ const HomeScreen = () => {
             );
             const json = await response.json();
             dispatch(setMovieList(json.movies));
-            console.log(JSON.stringify(store.getState()) + "   ******  ------")
+            console.log(JSON.stringify(store.getState()))
             setMovies(json.movies);
             return json.movies;
         } catch (error) {

@@ -1,11 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
-import { deleteProfile, setProfile } from '../../state/profileSlices';
-import { store } from "../../state/store";
 import Button from "../../components/button";
 import { useTranslation } from "react-i18next";
 
@@ -62,10 +60,6 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={{ fontSize: 40, fontWeight: 800, color: "#5381E6" }}>FINTIBA</Text>
-            {/* <TouchableOpacity style={{ backgroundColor: "#00A1FF", paddingHorizontal: 15, paddingVertical: 10, borderRadius: 10 }}
-                onPress={async () => { await promptAsync(); navigation.navigate("HomeScreen"); }}>
-                <Text style={{ fontSize: 20, color: "#ffffff" }}>Sign in with Google</Text>
-            </TouchableOpacity> */}
             <Button label={t("signInWithGoogle")} onPress={async () => { await promptAsync(); navigation.navigate("HomeScreen") }} />
         </View>
     )
